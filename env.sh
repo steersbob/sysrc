@@ -9,8 +9,8 @@
 
 # Generic
 alias gimme="sudo apt update && sudo apt dist-upgrade && sudo apt autoremove"
-alias updown="gimme; echo 'sleepy...'; sleep 5; shutdown now"
-alias upboot="gimme; echo 'booty!'; sleep 5; reboot"
+alias updown="gimme; echo 'sleepy...'; sleep 5; sudo shutdown now"
+alias upboot="gimme; echo 'booty!'; sleep 5; sudo reboot"
 alias where="which"
 alias selkey="xclip -sel clip < ~/.ssh/id_rsa.pub"
 alias vg="rg --vimgrep"
