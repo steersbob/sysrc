@@ -54,6 +54,7 @@ alias shellac=". ./.venv/bin/activate"
 # Git
 alias prettygit="git log --oneline --decorate --all --graph"
 alias fetchap="git fetch --all -p"
+alias rootd='cd "$(git rev-parse --show-toplevel)"'
 
 function prunel() {
     # Removes all local branches that do not have a counterpart on 'origin' or 'upstream'
