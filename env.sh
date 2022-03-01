@@ -14,12 +14,13 @@ alias upboot="gimme; echo 'booty!'; sleep 5; sudo reboot"
 alias where="which"
 alias selkey="xclip -sel clip < ~/.ssh/id_rsa.pub"
 alias vg="rg --vimgrep"
+alias ccode="devcontainer open"
 
-function assume-yes () {
+function assume-yes() {
     echo 'APT::Get::Assume-Yes "true";' | sudo tee /etc/apt/apt.conf.d/90assumeyes
 }
 
-function farshark () {
+function farshark() {
     echo "Opening interface $2 on $1"
     sudo echo ""
     ssh "$1" sudo tcpdump -i "$2" -U -s0 -w - 'not port 22' | sudo wireshark -k -i -
@@ -32,10 +33,10 @@ alias follow="docker-compose logs --follow"
 alias recompose="docker-compose down && docker-compose up -d"
 alias dknew='docker-compose up -d --force-recreate'
 
-function prepx () {
+function prepx() {
     # Early exit if current builder can handle ARM builds
     if [[ $(docker buildx inspect | grep 'linux/arm/v7') != '' ]]; then
-        return 
+        return
     fi
     docker run --rm --privileged multiarch/qemu-user-static --reset -p yes
     docker buildx rm bricklayer || true
@@ -43,7 +44,7 @@ function prepx () {
     docker buildx inspect --bootstrap
 }
 
-function pullup () {
+function pullup() {
     # shellcheck disable=SC2068
     dkc pull $@ && dkc up -d $@
 }
@@ -67,18 +68,18 @@ function synchel() {
 }
 
 function synchout() {
-    fetchap \
-    && git checkout "$1" \
-    && git pull \
-    && git submodule update \
-    && prunel;
+    fetchap &&
+        git checkout "$1" &&
+        git pull &&
+        git submodule update &&
+        prunel
 }
 
 function pushpr() {
     gh pr create -R "BrewBlox/$(basename "$(git rev-parse --show-toplevel)")"
 }
 
-function addrepo() {(
+function addrepo() { (
     set -ex
     cd ~/git
     git clone git@github.com:steersbob/"$1".git
@@ -88,7 +89,7 @@ function addrepo() {(
     git checkout -B develop --track upstream/develop
     git checkout -B edge --track upstream/edge
     git checkout develop
-)}
+); }
 
 # ESP32 development
 
