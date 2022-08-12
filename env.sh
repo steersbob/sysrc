@@ -23,7 +23,7 @@ function farshark() {
 
 function simcat() {
     port="${1:-8332}"
-    socat "tcp-listen:$port,bind=172.17.0.1,fork tcp:127.0.0.1:$port"
+    socat "tcp-listen:$port,bind=172.17.0.1,fork" "tcp:127.0.0.1:$port"
 }
 
 # Docker
