@@ -1,11 +1,6 @@
 #! /bin/bash
 #
-# To load on shell start, add to ~/.bashrc:
-#
-#    if [ -f ~/git/sysrc/env.sh ]; then
-#        . ~/git/sysrc/env.sh
-#    fi
-#
+# To load on shell start, run install_env.sh
 
 # Generic
 alias gimme="sudo apt update && sudo apt dist-upgrade && sudo apt autoremove"
@@ -24,6 +19,11 @@ function farshark() {
     echo "Opening interface $2 on $1"
     sudo echo ""
     ssh "$1" sudo tcpdump -i "$2" -U -s0 -w - 'not port 22' | sudo wireshark -k -i -
+}
+
+function simcat() {
+    port="${1:-8332}"
+    socat "tcp-listen:$port,bind=172.17.0.1,fork tcp:127.0.0.1:$port"
 }
 
 # Docker
