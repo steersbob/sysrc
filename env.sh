@@ -28,10 +28,10 @@ function simcat() {
 
 # Docker
 alias dk='docker'
-alias dkc='docker-compose'
-alias follow="docker-compose logs --follow"
-alias recompose="docker-compose down && docker-compose up -d"
-alias dknew='docker-compose up -d --force-recreate'
+alias dkc='docker compose'
+alias follow="docker compose logs --follow"
+alias recompose="docker compose down && docker compose up -d"
+alias dknew='docker compose up -d --force-recreate'
 
 function prepx() {
     # Early exit if current builder can handle ARM builds
