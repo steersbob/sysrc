@@ -26,6 +26,14 @@ function simcat() {
     socat "tcp-listen:$port,bind=172.17.0.1,fork" "tcp:127.0.0.1:$port"
 }
 
+function soundfix() {
+    sudo apt update
+    sudo apt install --reinstall \
+        "linux-image-$(uname -r)" \
+        "linux-modules-$(uname -r)" \
+        "linux-modules-extra-$(uname -r)"
+}
+
 # Docker
 alias dk='docker'
 alias dkc='docker compose'
