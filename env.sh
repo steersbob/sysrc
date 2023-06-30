@@ -15,6 +15,11 @@ function assume-yes() {
     echo 'APT::Get::Assume-Yes "true";' | sudo tee /etc/apt/apt.conf.d/90assumeyes
 }
 
+function disable-apt-ad() {
+    sudo mv /etc/apt/apt.conf.d/20apt-esm-hook.conf /etc/apt/apt.conf.d/20apt-esm-hook.conf.bak
+    sudo touch /etc/apt/apt.conf.d/20apt-esm-hook.conf
+}
+
 function farshark() {
     echo "Opening interface $2 on $1"
     sudo echo ""
