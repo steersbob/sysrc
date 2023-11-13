@@ -47,14 +47,12 @@ alias recompose="docker compose down && docker compose up -d"
 alias dknew='docker compose up -d --force-recreate'
 
 function prepx() {
-    # Early exit if current builder can handle ARM builds
-    if [[ $(docker buildx inspect | grep 'linux/arm/v7') != '' ]]; then
-        return
+    if ! docker buildx inspect | grep -q 'linux/arm/v7'; then
+        docker run --rm --privileged multiarch/qemu-user-static --reset -p yes
+        docker buildx rm bricklayer || true
+        docker buildx create --use --name bricklayer
+        docker buildx inspect --bootstrap
     fi
-    docker run --rm --privileged multiarch/qemu-user-static --reset -p yes
-    docker buildx rm bricklayer || true
-    docker buildx create --use --name bricklayer
-    docker buildx inspect --bootstrap
 }
 
 function pullup() {
